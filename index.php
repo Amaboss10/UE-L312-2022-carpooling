@@ -1,3 +1,0 @@
-<?php
-
-//commit Gleen CAMILLE
