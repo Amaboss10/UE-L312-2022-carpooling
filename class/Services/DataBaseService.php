@@ -97,4 +97,9 @@ class DataBaseService
 
         return $query->execute($data);
     }
+
+    public function createCar(string $numberplate, string $brand, string $model, string $type, string $color, int $year): bool
+    {
+        return false;
+    }
 }

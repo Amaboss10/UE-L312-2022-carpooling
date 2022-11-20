@@ -1,10 +1,10 @@
-<?php
+<?php declare(strict_types = 1);
 
 use App\Controllers\PostsController;
 
 require __DIR__ . '/vendor/autoload.php';
 
-$controller = new PostController();
+$controller = new PostsController();
 echo $controller->deletePost();
 ?>
 

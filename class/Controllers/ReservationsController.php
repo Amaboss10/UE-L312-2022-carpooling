@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace App\Controllers;
 
@@ -14,39 +14,37 @@ class ReservationsController
         $html = '';
 
         // If the form have been submitted :
-        if(isset($_POST['id'])
+        if (isset($_POST['id'])
         && isset($_POST['date'])
         && isset($_POST['departure_time'])
         && isset($_POST['arriving_time'])
         && isset($_POST['place_of_departure'])
         && isset($_POST['arrival_point'])
         ) {
-          // Create the reservation
-        $reservationsService = new ReservationsService();
-        $isOk = $reservationsService->setReservation(
-            null,
-            $_POST['id'],
-            $_POST['date'],
-            $_POST['departure_time'],
-            $_POST['arriving_time'],
-            $_POST['place_of_departure'],
-            $_POST['arrival_point']
-        );
-        if ($isOk) {
-            $html = 'la reservation est créé avec succès.';
-        }else {
-            $html = 'Erreur lors de la création de la reservation.';
-        }    
+            // Create the reservation
+            $reservationsService = new ReservationsService();
+            $isOk = $reservationsService->setReservation(
+                null,
+                $_POST['id'],
+                $_POST['date'],
+                $_POST['departure_time'],
+                $_POST['arriving_time'],
+                $_POST['place_of_departure'],
+                $_POST['arrival_point']
+            );
+            if ($isOk) {
+                $html = 'la reservation est créé avec succès.';
+            } else {
+                $html = 'Erreur lors de la création de la reservation.';
+            }
+        }
+
+        return $html;
     }
 
-    return $html;
-}
+    // Return the html for the read action
 
-    /*
-    * Return the html for the read action
-    */
-
-    public function getReservation(): string 
+    public function getReservation(): string
     {
         $html = '';
 
@@ -54,16 +52,17 @@ class ReservationsController
         $reservationsService = new ReservationsService();
         $reservations = $reservationsService->getReservation();
 
-        //Get html :
+        // Get html :
         foreach ($reservations as $reservation) {
             $html .=
             '#' . $reservation->getId() . ' ' .
-            $reservation>getDate(). ' ' .
-            $reservation->getDeparture_time(). ' ' .
-            $reservation->getArriving_time(). ' ' .
-            $reservation->getPlace_of_departure(). ' ' .
-            $reservation->getArrival_point(). '<br />';
+            $reservation > \getdate() . ' ' .
+            $reservation->getDeparture_time() . ' ' .
+            $reservation->getArriving_time() . ' ' .
+            $reservation->getPlace_of_departure() . ' ' .
+            $reservation->getArrival_point() . '<br />';
         }
+
         return $html;
     }
 
@@ -74,14 +73,14 @@ class ReservationsController
     {
         $html = '';
 
-        // If the form have been submitted : 
+        // If the form have been submitted :
         if (isset($_POST['id'])
             && isset($_POST['date'])
             && isset($_POST['departure_time'])
             && isset($_POST['arriving_time'])
             && isset($_POST['place_of_departure'])
             && isset($_POST['arrival_point'])) {
-            //update the reservation :
+            // update the reservation :
             $reservationsService = new ReservationsServices();
             $isOk = $reservationsService->setReservtion(
                 $_POST['id'],
@@ -91,33 +90,34 @@ class ReservationsController
                 $_POST['place_of_departure'],
                 $_POST['arrival_point']
             );
-            if ($isOk){
+            if ($isOk) {
                 $html = 'la réservation est mis à jour avec succès';
-            }else {
+            } else {
                 $html = 'erreur lors de la mis à jour de la reservation';
             }
-            }
-            return $html;
+        }
+
+        return $html;
     }
 
     /**
      * delete a reservation.
-    */
+     */
     public function deleteReservation(): string
     {
         $html = '';
-        //if the form have been submitted :
-        if (isset($_POST['id'])){
-            //delete the car
+        // if the form have been submitted :
+        if (isset($_POST['id'])) {
+            // delete the car
             $reservationsService = new ReservationsService();
             $isOk = $reservationsService->deleteReservation($_POST['id']);
-            if ($isOk){
+            if ($isOk) {
                 $html = 'la reservation a été supprimé avec succès';
-            }else {
+            } else {
                 $html = 'Erreur lors de la suppression de la reservation';
             }
         }
-        
+
         return $html;
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace App\Controllers;
 
@@ -14,7 +14,7 @@ class CarsController
         $html = '';
 
         // If the form have been submitted :
-        if(isset($_POST['id'])
+        if (isset($_POST['id'])
         && isset($_POST['numberplate'])
         && isset($_POST['brand'])
         && isset($_POST['model'])
@@ -22,33 +22,31 @@ class CarsController
         && isset($_POST['color'])
         && isset($_POST['year'])
         ) {
-          // Create the car 
-        $carsService = new CarsService();
-        $isOk = $carsService->setCar(
-            null,
-            $_POST['id'],
-            $_POST['numberplate'],
-            $_POST['brand'],
-            $_POST['model'],
-            $_POST['type'],
-            $_POST['color'],
-            $_POST['year']
-        );
-        if ($isOk) {
-            $html = 'voiture créé avec succès.';
-        }else {
-            $html = 'Erreur lors de la création de la voiture.';
-        }    
+            // Create the car
+            $carsService = new CarsService();
+            $isOk = $carsService->setCar(
+                null,
+                $_POST['id'],
+                $_POST['numberplate'],
+                $_POST['brand'],
+                $_POST['model'],
+                $_POST['type'],
+                $_POST['color'],
+                $_POST['year']
+            );
+            if ($isOk) {
+                $html = 'voiture créé avec succès.';
+            } else {
+                $html = 'Erreur lors de la création de la voiture.';
+            }
+        }
+
+        return $html;
     }
 
-    return $html;
-}
+    // Return the html for the read action
 
-    /*
-    * Return the html for the read action
-    */
-
-    public function getCars(): string 
+    public function getCars(): string
     {
         $html = '';
 
@@ -56,17 +54,18 @@ class CarsController
         $carsService = new CarsService();
         $cars = $carsService->getCars();
 
-        //Get html :
+        // Get html :
         foreach ($cars as $car) {
             $html .=
             '#' . $car->getId . ' ' .
-            $car->getNumberplate(). ' ' .
-            $car->getBrand(). ' ' .
-            $car->getModel(). ' ' .
-            $car->getType(). ' ' .
-            $car->getColor(). ' ' .
-            $car->getYear(). '<br />';
+            $car->getNumberplate() . ' ' .
+            $car->getBrand() . ' ' .
+            $car->getModel() . ' ' .
+            $car->getType() . ' ' .
+            $car->getColor() . ' ' .
+            $car->getYear() . '<br />';
         }
+
         return $html;
     }
 
@@ -77,7 +76,7 @@ class CarsController
     {
         $html = '';
 
-        // If the form have been submitted : 
+        // If the form have been submitted :
         if (isset($_POST['id'])
             && isset($_POST['numberplate'])
             && isset($_POST['brand'])
@@ -85,8 +84,8 @@ class CarsController
             && isset($_POST['type'])
             && isset($_POST['color'])
             && isset($_POST['year'])) {
-            //update the car :
-            $carsService = new CarsServices();
+            // update the car :
+            $carsService = new CarsService();
             $isOk = $carsService->setCar(
                 $_POST['id'],
                 $_POST['numberplate'],
@@ -96,33 +95,34 @@ class CarsController
                 $_POST['color'],
                 $_POST['year'],
             );
-            if ($isOk){
+            if ($isOk) {
                 $html = 'la voiture est mis à jour avec succès';
-            }else {
+            } else {
                 $html = 'erreur lors de la mis à jour de la voiture';
             }
-            }
-            return $html;
+        }
+
+        return $html;
     }
 
     /**
      * delete an car.
-    */
+     */
     public function deleteCar(): string
     {
         $html = '';
-        //if the form have been submitted :
-        if (isset($_POST['id'])){
-            //delete the car
+        // if the form have been submitted :
+        if (isset($_POST['id'])) {
+            // delete the car
             $carsService = new CarsService();
             $isOk = $carsService->deleteCar($_POST['id']);
-            if ($isOk){
+            if ($isOk) {
                 $html = 'la voiture a été supprimé avec succès';
-            }else {
+            } else {
                 $html = 'Erreur lors de la suppression de la voiture';
             }
         }
-        
+
         return $html;
     }
 }

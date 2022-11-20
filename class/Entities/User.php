@@ -1,8 +1,6 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace App\Entities;
-
-use DateTime;
 
 class User
 {
@@ -52,12 +50,12 @@ class User
         $this->email = $email;
     }
 
-    public function getBirthday(): DateTime
+    public function getBirthday(): \DateTime
     {
         return $this->birthday;
     }
 
-    public function setBirthday(DateTime $birthday): void
+    public function setBirthday(\DateTime $birthday): void
     {
         $this->birthday = $birthday;
     }

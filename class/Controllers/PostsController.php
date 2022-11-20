@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace App\Controllers;
 
@@ -14,35 +14,33 @@ class PostsController
         $html = '';
 
         // If the form have been submitted :
-        if(isset($_POST['id'])
+        if (isset($_POST['id'])
         && isset($_POST['description'])
         && isset($_POST['price'])
         && isset($_POST['date'])
         ) {
-          // Create the post 
-        $postsService = new PostsService();
-        $isOk = $postsService->setPost(
-            null,
-            $_POST['id'],
-            $_POST['description'],
-            $_POST['price'],
-            $_POST['date']
-        );
-        if ($isOk) {
-            $html = 'l\'annonce est créé avec succès.';
-        }else {
-            $html = 'Erreur lors de la création de l\' annonce.';
-        }    
+            // Create the post
+            $postsService = new PostsService();
+            $isOk = $postsService->setPost(
+                null,
+                $_POST['id'],
+                $_POST['description'],
+                $_POST['price'],
+                $_POST['date']
+            );
+            if ($isOk) {
+                $html = 'l\'annonce est créé avec succès.';
+            } else {
+                $html = 'Erreur lors de la création de l\' annonce.';
+            }
+        }
+
+        return $html;
     }
 
-    return $html;
-}
+    // Return the html for the read action
 
-    /*
-    * Return the html for the read action
-    */
-
-    public function getPosts(): string 
+    public function getPosts(): string
     {
         $html = '';
 
@@ -50,14 +48,15 @@ class PostsController
         $postService = new PostsService();
         $posts = $postService->getPosts();
 
-        //Get html :
+        // Get html :
         foreach ($posts as $post) {
             $html .=
             '#' . $post->getId . ' ' .
-            $post->getDescription(). ' ' .
-            $post->getPrice(). ' ' .
-            $post->getDate(). '<br />';
+            $post->getDescription() . ' ' .
+            $post->getPrice() . ' ' .
+            $post->getDate() . '<br />';
         }
+
         return $html;
     }
 
@@ -68,12 +67,12 @@ class PostsController
     {
         $html = '';
 
-        // If the form have been submitted : 
+        // If the form have been submitted :
         if (isset($_POST['id'])
             && isset($_POST['description'])
             && isset($_POST['price'])
             && isset($_POST['date'])) {
-            //update the posts :
+            // update the posts :
             $postsService = new PostsServices();
             $isOk = $postsService->setPost(
                 $_POST['id'],
@@ -81,33 +80,34 @@ class PostsController
                 $_POST['price'],
                 $_POST['date'],
             );
-            if ($isOk){
+            if ($isOk) {
                 $html = 'l\' annonce est mis à jour avec succès';
-            }else {
+            } else {
                 $html = 'erreur lors de la mis à jour de l\' annonce ';
             }
-            }
-            return $html;
+        }
+
+        return $html;
     }
 
     /**
      * delete a posts.
-    */
+     */
     public function deletePost(): string
     {
         $html = '';
-        //if the form have been submitted :
-        if (isset($_POST['id'])){
-            //delete the car
+        // if the form have been submitted :
+        if (isset($_POST['id'])) {
+            // delete the car
             $postsService = new PostsService();
             $isOk = $postsService->deleteCar($_POST['id']);
-            if ($isOk){
+            if ($isOk) {
                 $html = 'l\'annonce a été supprimé avec succès';
-            }else {
+            } else {
                 $html = 'Erreur lors de la suppression de l\'annonce';
             }
         }
-        
+
         return $html;
     }
 }

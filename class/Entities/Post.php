@@ -1,8 +1,6 @@
-<?php 
+<?php declare(strict_types = 1);
 
 namespace App\Entities;
-
-use DateTime;
 
 class Post
 {
@@ -41,12 +39,12 @@ class Post
         $this->price = $price;
     }
 
-    public function getDate(): DateTime
+    public function getDate(): \DateTime
     {
         return $this->date;
     }
 
-    public function setDate(DateTime $date): void
+    public function setDate(\DateTime $date): void
     {
         $this->date = $date;
     }

@@ -1,7 +1,6 @@
-<?php
+<?php declare(strict_types = 1);
 
 use App\Controllers\PostsController;
-use App\Services\PostsService;
 
 require __DIR__ . '/vendor/autoload.php';
 
