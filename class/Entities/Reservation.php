@@ -2,6 +2,8 @@
 
 namespace App\Entities;
 
+use DateTime;
+
 class Reservation
 {
     private $id;
@@ -21,12 +23,12 @@ class Reservation
         $this->id = $id;
     }
 
-    public function getDate(): \DateTime
+    public function getDate(): DateTime
     {
         return $this->date;
     }
 
-    public function setDate(\Datetime $date): void
+    public function setDate(Datetime $date): void
     {
         $this->date = $date;
     }

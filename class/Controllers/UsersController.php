@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace App\Controllers;
 
@@ -14,10 +14,10 @@ class UsersController
         $html = '';
 
         // If the form have been submitted :
-        if (isset($_POST['firstname']) &&
-            isset($_POST['lastname']) &&
-            isset($_POST['email']) &&
-            isset($_POST['birthday'])) {
+        if (isset($_POST['firstname'])
+            && isset($_POST['lastname'])
+            && isset($_POST['email'])
+            && isset($_POST['birthday'])) {
             // Create the user :
             $usersService = new UsersService();
             $isOk = $usersService->setUser(
@@ -69,11 +69,11 @@ class UsersController
         $html = '';
 
         // If the form have been submitted :
-        if (isset($_POST['id']) &&
-            isset($_POST['firstname']) &&
-            isset($_POST['lastname']) &&
-            isset($_POST['email']) &&
-            isset($_POST['birthday'])) {
+        if (isset($_POST['id'])
+            && isset($_POST['firstname'])
+            && isset($_POST['lastname'])
+            && isset($_POST['email'])
+            && isset($_POST['birthday'])) {
             // Update the user :
             $usersService = new UsersService();
             $isOk = $usersService->setUser(

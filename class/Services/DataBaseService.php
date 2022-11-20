@@ -1,31 +1,27 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace App\Services;
 
-use DateTime;
-use Exception;
-use PDO;
-
 class DataBaseService
 {
-    const HOST = '127.0.0.1';
-    const PORT = '3306';
-    const DATABASE_NAME = 'carpooling';
-    const MYSQL_USER = 'root';
-    const MYSQL_PASSWORD = 'password';
+    public const HOST = '127.0.0.1';
+    public const PORT = '3306';
+    public const DATABASE_NAME = 'carpooling';
+    public const MYSQL_USER = 'root';
+    public const MYSQL_PASSWORD = 'password';
 
     private $connection;
 
     public function __construct()
     {
         try {
-            $this->connection = new PDO(
+            $this->connection = new \PDO(
                 'mysql:host=' . self::HOST . ';port=' . self::PORT . ';dbname=' . self::DATABASE_NAME,
                 self::MYSQL_USER,
                 self::MYSQL_PASSWORD
             );
-            $this->connection->exec("SET CHARACTER SET utf8");
-        } catch (Exception $e) {
+            $this->connection->exec('SET CHARACTER SET utf8');
+        } catch (\Exception $e) {
             echo 'Erreur : ' . $e->getMessage();
         }
     }
@@ -33,7 +29,7 @@ class DataBaseService
     /**
      * Create an user.
      */
-    public function createUser(string $firstname, string $lastname, string $email, DateTime $birthday): bool
+    public function createUser(string $firstname, string $lastname, string $email, \DateTime $birthday): bool
     {
         $isOk = false;
 
@@ -41,13 +37,12 @@ class DataBaseService
             'firstname' => $firstname,
             'lastname' => $lastname,
             'email' => $email,
-            'birthday' => $birthday->format(DateTime::RFC3339),
+            'birthday' => $birthday->format(\DateTime::RFC3339),
         ];
         $sql = 'INSERT INTO users (firstname, lastname, email, birthday) VALUES (:firstname, :lastname, :email, :birthday)';
         $query = $this->connection->prepare($sql);
-        $isOk = $query->execute($data);
 
-        return $isOk;
+        return $query->execute($data);
     }
 
     /**
@@ -59,7 +54,7 @@ class DataBaseService
 
         $sql = 'SELECT * FROM users';
         $query = $this->connection->query($sql);
-        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+        $results = $query->fetchAll(\PDO::FETCH_ASSOC);
         if (!empty($results)) {
             $users = $results;
         }
@@ -70,7 +65,7 @@ class DataBaseService
     /**
      * Update an user.
      */
-    public function updateUser(string $id, string $firstname, string $lastname, string $email, DateTime $birthday): bool
+    public function updateUser(string $id, string $firstname, string $lastname, string $email, \DateTime $birthday): bool
     {
         $isOk = false;
 
@@ -79,13 +74,12 @@ class DataBaseService
             'firstname' => $firstname,
             'lastname' => $lastname,
             'email' => $email,
-            'birthday' => $birthday->format(DateTime::RFC3339),
+            'birthday' => $birthday->format(\DateTime::RFC3339),
         ];
         $sql = 'UPDATE users SET firstname = :firstname, lastname = :lastname, email = :email, birthday = :birthday WHERE id = :id;';
         $query = $this->connection->prepare($sql);
-        $isOk = $query->execute($data);
 
-        return $isOk;
+        return $query->execute($data);
     }
 
     /**
@@ -100,8 +94,7 @@ class DataBaseService
         ];
         $sql = 'DELETE FROM users WHERE id = :id;';
         $query = $this->connection->prepare($sql);
-        $isOk = $query->execute($data);
 
-        return $isOk;
+        return $query->execute($data);
     }
 }

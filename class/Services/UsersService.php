@@ -1,9 +1,8 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace App\Services;
 
 use App\Entities\User;
-use DateTime;
 
 class UsersService
 {
@@ -15,7 +14,7 @@ class UsersService
         $isOk = false;
 
         $dataBaseService = new DataBaseService();
-        $birthdayDateTime = new DateTime($birthday);
+        $birthdayDateTime = new \DateTime($birthday);
         if (empty($id)) {
             $isOk = $dataBaseService->createUser($firstname, $lastname, $email, $birthdayDateTime);
         } else {
@@ -41,7 +40,7 @@ class UsersService
                 $user->setFirstname($userDTO['firstname']);
                 $user->setLastname($userDTO['lastname']);
                 $user->setEmail($userDTO['email']);
-                $date = new DateTime($userDTO['birthday']);
+                $date = new \DateTime($userDTO['birthday']);
                 if ($date !== false) {
                     $user->setbirthday($date);
                 }
@@ -60,8 +59,7 @@ class UsersService
         $isOk = false;
 
         $dataBaseService = new DataBaseService();
-        $isOk = $dataBaseService->deleteUser($id);
 
-        return $isOk;
+        return $dataBaseService->deleteUser($id);
     }
 }
