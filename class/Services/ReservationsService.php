@@ -59,6 +59,6 @@ class ReservationsService
 
         $dataBaseService = new DataBaseService();
 
-        return $dataBaseService->deleteReservations($idReservation);
+        return $dataBaseService->deleteReservation($idReservation);
     }
 }

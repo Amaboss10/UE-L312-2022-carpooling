@@ -31,7 +31,7 @@ class PostsService
     {
         $posts = [];
         $dataBaseService = new DataBaseService();
-        $postsDTO = $dataBaseService->getPost();
+        $postsDTO = $dataBaseService->getPosts();
         if (!empty($postsDTO)) {
             foreach ($postsDTO as $postDTO) {
                 $post = new Post();
