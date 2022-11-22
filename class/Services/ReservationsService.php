@@ -9,13 +9,13 @@ class ReservationsService
     /**
      * create Reservation | update Reservation.
      */
-    public function setReservations(?string $idReservation, string $date, string $departure_time, string $arriving_time, string $place_of_departure, string $arrival_point)
+    public function setReservations(?string $idReservation, \DateTime $date, string $departure_time, string $arriving_time, string $place_of_departure, string $arrival_point): bool
     {
-        $reservationId = '';
+        $reservationId = false;
 
         $dataBaseService = new DataBaseService();
-        $reservationDateTime = new \DateTime($datereservation);
-        if (empty($id)) {
+        $reservationDateTime = new \DateTime($date);
+        if (empty($idReservation)) {
             $reservationId = $dataBaseService->createReservation($date, $departure_time, $arriving_time, $place_of_departure, $arrival_point);
         } else {
             $dataBaseService->updateReservation($idReservation, $date, $departure_time, $arriving_time, $place_of_departure, $arrival_point);
@@ -36,18 +36,13 @@ class ReservationsService
             if (!empty($reservationsDTO)) {
                 foreach ($reservationsDTO as $reservationDTO) {
                     $reservation = new Reservation();
-                    $reservation->setidReservation($reservationDTO['idReservation']);
-                    $reservation->setdate($reservationDTO['date']);
-                    $reservation->setplace_of_departure($reservationDTO['place_of_departure']);
-                    $reservation->setarrival_point($reservationDTO['arrival_point']);
-                    $date = new \DateTime($reservationDTO['departure_time']);
-                    if ($date !== false) {
-                        $reservation->setdeparture_time($date);
-                    }
-                    $date_arr = new \DateTime($reservationDTO['arriving_time']);
-                    if ($date_arr !== false) {
-                        $reservation->setdeparture_time($date_arr);
-                    }
+                    $reservation->setId($reservationDTO['idReservation']);
+                    $reservation->setDate($reservationDTO['date']);
+                    $reservation->setPlace_of_departure($reservationDTO['place_of_departure']);
+                    $reservation->setArrival_point($reservationDTO['arrival_point']);
+                    $reservation->setDeparture_time($reservationDTO['departure_time']);
+                    $reservation->setArriving_time($reservationDTO['arriving_time']);
+
                     $reservations[] = $reservations;
                 }
             }
@@ -64,6 +59,6 @@ class ReservationsService
 
         $dataBaseService = new DataBaseService();
 
-        return $dataBaseService->deleteReservations($id);
+        return $dataBaseService->deleteReservations($idReservation);
     }
 }

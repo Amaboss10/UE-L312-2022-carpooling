@@ -23,7 +23,7 @@ class ReservationsController
         ) {
             // Create the reservation
             $reservationsService = new ReservationsService();
-            $isOk = $reservationsService->setReservation(
+            $isOk = $reservationsService->setReservations(
                 null,
                 $_POST['id'],
                 $_POST['date'],
@@ -50,7 +50,7 @@ class ReservationsController
 
         // Get all reservation:
         $reservationsService = new ReservationsService();
-        $reservations = $reservationsService->getReservation();
+        $reservations = $reservationsService->getReservations();
 
         // Get html :
         foreach ($reservations as $reservation) {
@@ -81,8 +81,8 @@ class ReservationsController
             && isset($_POST['place_of_departure'])
             && isset($_POST['arrival_point'])) {
             // update the reservation :
-            $reservationsService = new ReservationsServices();
-            $isOk = $reservationsService->setReservtion(
+            $reservationService = new ReservationsService();
+            $isOk = $reservationService->setReservations(
                 $_POST['id'],
                 $_POST['date'],
                 $_POST['departure_time'],
@@ -110,7 +110,7 @@ class ReservationsController
         if (isset($_POST['id'])) {
             // delete the car
             $reservationsService = new ReservationsService();
-            $isOk = $reservationsService->deleteReservation($_POST['id']);
+            $isOk = $reservationsService->deleteReservations($_POST['id']);
             if ($isOk) {
                 $html = 'la reservation a été supprimé avec succès';
             } else {

@@ -18,6 +18,7 @@ class PostsController
         && isset($_POST['description'])
         && isset($_POST['price'])
         && isset($_POST['date'])
+        && isset($_POST['number_of_passengers'])
         ) {
             // Create the post
             $postsService = new PostsService();
@@ -26,7 +27,8 @@ class PostsController
                 $_POST['id'],
                 $_POST['description'],
                 $_POST['price'],
-                $_POST['date']
+                $_POST['date'],
+                $_POST['number_of_passangers']
             );
             if ($isOk) {
                 $html = 'l\'annonce est créé avec succès.';
@@ -46,7 +48,7 @@ class PostsController
 
         // Get all cars:
         $postService = new PostsService();
-        $posts = $postService->getPosts();
+        $posts = $postService->getPost();
 
         // Get html :
         foreach ($posts as $post) {
@@ -54,7 +56,8 @@ class PostsController
             '#' . $post->getId . ' ' .
             $post->getDescription() . ' ' .
             $post->getPrice() . ' ' .
-            $post->getDate() . '<br />';
+            $post->getDate() . ' ' .
+            $post->getNumber_of_passengers() . '<br />';
         }
 
         return $html;
@@ -63,7 +66,7 @@ class PostsController
     /**
      * Update the user.
      */
-    public function updateCar(): string
+    public function updatePosts(): string
     {
         $html = '';
 
@@ -71,14 +74,16 @@ class PostsController
         if (isset($_POST['id'])
             && isset($_POST['description'])
             && isset($_POST['price'])
-            && isset($_POST['date'])) {
+            && isset($_POST['date'])
+            && isset($_POST['number_of_passengers'])) {
             // update the posts :
-            $postsService = new PostsServices();
+            $postsService = new PostsService();
             $isOk = $postsService->setPost(
                 $_POST['id'],
                 $_POST['description'],
                 $_POST['price'],
                 $_POST['date'],
+                $_POST['number_of_passengers'],
             );
             if ($isOk) {
                 $html = 'l\' annonce est mis à jour avec succès';
@@ -100,7 +105,7 @@ class PostsController
         if (isset($_POST['id'])) {
             // delete the car
             $postsService = new PostsService();
-            $isOk = $postsService->deleteCar($_POST['id']);
+            $isOk = $postsService->deletePost($_POST['id']);
             if ($isOk) {
                 $html = 'l\'annonce a été supprimé avec succès';
             } else {

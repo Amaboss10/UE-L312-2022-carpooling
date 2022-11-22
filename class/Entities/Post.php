@@ -8,6 +8,7 @@ class Post
     private $description;
     private $price;
     private $date;
+    private $number_of_passengers;
 
     public function getId(): string
     {
@@ -47,5 +48,15 @@ class Post
     public function setDate(\DateTime $date): void
     {
         $this->date = $date;
+    }
+
+    public function getNumber_of_passengers(): int
+    {
+        return $this->number_of_passengers;
+    }
+
+    public function setNumber_of_passengers(int $number_of_passengers): void
+    {
+        $this->number_of_passengers = $number_of_passengers;
     }
 }

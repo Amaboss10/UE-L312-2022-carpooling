@@ -9,15 +9,15 @@ class PostsService
     /**
      * Create Post /update post.
      */
-    public function SetPost(?string $idPost, string $description, string $price, string $date, string $number_of_passangers)
+    public function SetPost(?string $idPost, string $description, int $price, \DateTime $date, int $number_of_passengers)
     {
         $postId = '';
         $dataBaseService = new DataBaseService();
         $dateDateTime = new \DateTime($date);
-        if (empty($postID)) {
-            $postId = $dataBaseService->createPost($description, $price, $date, $number_of_passangers);
+        if (empty($idPost)) {
+            $postId = $dataBaseService->createPost($description, $price, $date, $number_of_passengers);
         } else {
-            $dataBaseService->updatePost($idPost, $description, $price, $date, $number_of_passangers);
+            $dataBaseService->updatePost($idPost, $description, $price, $date, $number_of_passengers);
             $postId = $idPost;
         }
 
@@ -31,22 +31,24 @@ class PostsService
     {
         $posts = [];
         $dataBaseService = new DataBaseService();
-        $postsDTO = $dataBaseService->getPosts();
+        $postsDTO = $dataBaseService->getPost();
         if (!empty($postsDTO)) {
-            foreach ($postDTO as $postDTO) {
-                $Post = new post();
-                $post->setidPost($postDTO['idPost']);
-                $post->setdescription($postDTO['description']);
-                $post->setprice($postDTO['price']);
-                $post->setdate($postDTO['date']);
-                $post->senumber_of_passangers($postDTO['number_of_passangers']);
-                $date = new \DateTime($PostDTO['date']);
+            foreach ($postsDTO as $postDTO) {
+                $post = new Post();
+                $post->setId($postDTO['idPost']);
+                $post->setDescription($postDTO['description']);
+                $post->setPrice($postDTO['price']);
+                $post->setDate($postDTO['date']);
+                $post->setNumber_of_passengers($postDTO['number_of_passengers']);
+                /*$date = new \DateTime($postDTO['date']);
                 if ($date !== false) {
-                    $post->setbirthday($date);
-                }
+                    $post->setBirthday($date);
+                }*/
                 $posts[] = $post;
             }
         }
+
+        return $posts;
     }
 
         /**

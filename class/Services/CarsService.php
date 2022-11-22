@@ -9,9 +9,9 @@ class CarsService
     /**
      * Create a car / update CAr.
      */
-    public function setCar(?string $idCAR, string $numberplate, string $brand, string $model, string $type, string $color, string $year)
+    public function setCar(?string $idCAR, string $numberplate, string $brand, string $model, string $type, string $color, int $year): bool
     {
-        $carId = '';
+        $carId = false;
         $dataBaseService = new DatabaseService();
         if (empty($idCAR)) {
             $carId = $dataBaseService->createCar($numberplate, $brand, $model, $type, $color, $year);
@@ -34,13 +34,13 @@ class CarsService
         if (!empty($carsDTO)) {
             foreach ($carsDTO as $carDTO);
             $car = new Car();
-            $car->setidCar($carDTO['idCar']);
-            $car->setnumberplate($caDTOr['numberplate']);
-            $car->setbrand($caDTOr['brand']);
-            $car->setmodel($carDTO['model']);
-            $car->settype($carDTO['type']);
-            $car->setcolor($carDTO['color']);
-            $car->setyear($carDTO['year']);
+            $car->setId($carDTO['idCar']);
+            $car->setNumberplate($carDTO['numberplate']);
+            $car->setBrand($carDTO['brand']);
+            $car->setModel($carDTO['model']);
+            $car->setType($carDTO['type']);
+            $car->setColor($carDTO['color']);
+            $car->setYear($carDTO['year']);
             $cars[] = $car;
         }
 
