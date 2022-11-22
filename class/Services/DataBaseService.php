@@ -2,8 +2,6 @@
 
 namespace App\Services;
 
-use DateTime;
-
 class DataBaseService
 {
     public const HOST = '127.0.0.1';
@@ -100,58 +98,55 @@ class DataBaseService
         return $query->execute($data);
     }
 
-     /**  
-    * Create a car
-    */
-
+    /**
+     * Create a car.
+     */
     public function createCar(string $numberplate, string $brand, string $model, string $type, string $color, int $year): bool
-    {   
+    {
         $isOk = false;
-        
+
         $data = [
-            'numberplate'=> $numberplate,
+            'numberplate' => $numberplate,
             'brand' => $brand,
             'model' => $model,
             'type' => $type,
             'color' => $color,
-            'year' => $year
+            'year' => $year,
         ];
         $sql = 'INSERT INTO cars (numberplate, brand, model, type, color, year) VALUES (:numberplate, :brand, :model, :type, :color, :year)';
         $query = $this->connection->prepare($sql);
 
         return $query->execute($data);
     }
-    /*
-    * Return all cars
-    */
+
+    // Return all cars
     public function getCars(): array
     {
         $cars = [];
 
-        $sql  = 'SELECT *FROM cars';
+        $sql = 'SELECT *FROM cars';
         $query = $this->connection->query($sql);
         $results = $query->fetchAll(\PDO::FETCH_ASSOC);
-        if(!empty($results)){
+        if (!empty($results)) {
             $cars = $results;
         }
+
         return $cars;
     }
 
-    /*
-    * Update a car
-    */
-    public function updateCar(string $id,string $numberplate, string $brand, string $model, string $type, string $color, int $year): bool
+    // Update a car
+    public function updateCar(string $id, string $numberplate, string $brand, string $model, string $type, string $color, int $year): bool
     {
         $isOk = false;
 
         $data = [
-            'id'=> $id,
-            'numberplate'=> $numberplate,
+            'id' => $id,
+            'numberplate' => $numberplate,
             'brand' => $brand,
             'model' => $model,
             'type' => $type,
             'color' => $color,
-            'year' => $year
+            'year' => $year,
         ];
         $sql = 'UPDATE cars SET numberplate = :numberplate, brand = :brand, model = :model, type = :type, color = :color, year = :year WHERE id = :id;';
         $query = $this->connection->prepare($sql);
@@ -163,7 +158,7 @@ class DataBaseService
     {
         $isOk = false;
         $data = [
-            'id' => $id
+            'id' => $id,
         ];
         $sql = 'DELETE FROM cars WHERE id = :id;';
         $query = $this->connection->prepare($sql);
@@ -171,11 +166,10 @@ class DataBaseService
         return $query->execute($data);
     }
 
-    /**  
-    * Create a post
-    */
-
-    public function createPost(string $description, int $price, DateTime $date, $number_of_passengers): bool
+    /**
+     * Create a post.
+     */
+    public function createPost(string $description, int $price, \DateTime $date, $number_of_passengers): bool
     {
         $isOk = false;
 
@@ -183,7 +177,7 @@ class DataBaseService
             'description' => $description,
             'price' => $price,
             'date' => $date,
-            'number_of_passengers' => $number_of_passengers
+            'number_of_passengers' => $number_of_passengers,
         ];
         $sql = 'INSERT INTO post (description, price, date, number_of_passengers) VALUES (:description, :price, : date, :number_of_passengers)';
         $query = $this->connection->prepare($sql);
@@ -191,9 +185,7 @@ class DataBaseService
         return $query->execute($data);
     }
 
-    /*
-    * Return all posts.
-    */
+    // Return all posts.
     public function getPosts(): array
     {
         $posts = [];
@@ -202,52 +194,46 @@ class DataBaseService
         $query = $this->connection->prepare($sql);
         $results = $query->fetchAll(\PDO::FETCH_ASSOC);
         if (!empty($results)) {
-            $posts = $results; 
+            $posts = $results;
         }
+
         return $posts;
     }
 
-    /*
-    * Update an post
-    */
-    public function updatePost(string $id, string $description, int $price, DateTime $date, $number_of_passengers): bool
+    // Update an post
+    public function updatePost(string $id, string $description, int $price, \DateTime $date, $number_of_passengers): bool
     {
         $isOk = false;
-        
+
         $data = [
             'id' => $id,
             'description' => $description,
             'price' => $price,
             'date' => $date,
-            'number_of_passengers' => $number_of_passengers
+            'number_of_passengers' => $number_of_passengers,
         ];
         $sql = 'UPDATE post SET description = :description, price = :price, date = :date, number_of_passenger = :number_of_passengers WHERE id = :id;)';
-        $query= $this->connection->prepare($sql);
+        $query = $this->connection->prepare($sql);
 
         return $query->execute($data);
     }
-    
-    /*
-    * Delete a Post
-    */
+
+    // Delete a Post
     public function deletePost(string $id): bool
     {
-        $isOk= false;
+        $isOk = false;
 
         $data = [
-            'id' => $id
+            'id' => $id,
         ];
         $sql = 'DELETE FROM post WHERE id = :id;';
         $query = $this->connection->prepare($sql);
 
         return $query->execute($data);
+    }
 
-    } 
-
-    /*
-    * Create a reservation
-    */
-    public function createReservation(DateTime $date, string $departure_time, string $arriving_time, string $place_of_departure, string $arrival_point): bool
+    // Create a reservation
+    public function createReservation(\DateTime $date, string $departure_time, string $arriving_time, string $place_of_departure, string $arrival_point): bool
     {
         $isOk = false;
 
@@ -256,18 +242,15 @@ class DataBaseService
             'departure_time' => $departure_time,
             'arriving_time' => $arriving_time,
             'place_of_departure' => $place_of_departure,
-            'arrival_point' => $arrival_point
+            'arrival_point' => $arrival_point,
         ];
         $sql = 'INSERT INTO reservations (date, departure_time, arriving_time, place_of_departure, arrival_point) VALUES (:date, :departure_time, :arriving_time, :place_of_departure, :arrival_point)';
         $query = $this->connection->prepare($sql);
 
         return $query->execute($data);
-
     }
 
-    /*
-    * Return all posts 
-    */
+    // Return all posts
     public function getReservations(): array
     {
         $reservations = [];
@@ -278,13 +261,12 @@ class DataBaseService
         if (!empty($results)) {
             $reservations = $results;
         }
-        return  $reservations;
+
+        return $reservations;
     }
 
-    /*
-    * update an reservation 
-    */
-    public function updateReservation(string $id, DateTime $date, string $departure_time, string $arriving_time, string $place_of_departure, string $arrival_point) :bool
+    // update an reservation
+    public function updateReservation(string $id, \DateTime $date, string $departure_time, string $arriving_time, string $place_of_departure, string $arrival_point): bool
     {
         $isOk = false;
 
@@ -294,28 +276,25 @@ class DataBaseService
             'departure_time' => $departure_time,
             'arriving_time' => $arriving_time,
             'place_of_departure' => $place_of_departure,
-            'arrival_point' => $arrival_point
+            'arrival_point' => $arrival_point,
         ];
-        $sql ='UPDATE reservations SET date = :date, departure_time = :departure_time, arriving_time = :arriving_time, place_of_departure = :place_of_departure, arrival_point = :arrival_point WHERE id = :id';
+        $sql = 'UPDATE reservations SET date = :date, departure_time = :departure_time, arriving_time = :arriving_time, place_of_departure = :place_of_departure, arrival_point = :arrival_point WHERE id = :id';
         $query = $this->connection->prepare($sql);
 
         return $query->execute($data);
     }
 
-    /*
-    * delete a reservation 
-    */
+    // delete a reservation
     public function deleteReservation(string $id): bool
     {
         $isOk = false;
 
         $data = [
-            'id' => $id
+            'id' => $id,
         ];
         $sql = 'DELETE FROM reservations WHERE id = :id;';
         $query = $this->connection->prepare($sql);
-        
+
         return $query->execute($data);
     }
-
 }
