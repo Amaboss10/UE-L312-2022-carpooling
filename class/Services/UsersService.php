@@ -1,15 +1,18 @@
-<?php declare(strict_types = 1);
-
+<?php 
 namespace App\Services;
 
 use App\Entities\User;
+use App\Entities\Car;
+use App\Entities\Post;
+use App\Entities\Reservation;
+use DateTime;
 
 class UsersService
 {
     /**
      * Create or update an user.
      */
-    public function setUser(?string $id, string $firstname, string $lastname, string $email, string $birthday): bool
+    public function setUser(?string $id, string $firstname, string $lastname, string $email, string $birthday): string
     {
         $isOk = false;
 
@@ -61,5 +64,116 @@ class UsersService
         $dataBaseService = new DataBaseService();
 
         return $dataBaseService->deleteUser($id);
+    }
+
+
+/**
+     * Create relation bewteen an user and his car.
+     */
+    public function setUserCar(string $userId, string $carId): bool
+    {
+        $isOk = false;
+
+        $dataBaseService = new DataBaseService();
+        $isOk = $dataBaseService->setUserCar($userId, $carId);
+
+        return $isOk;
+    }
+
+    /**
+     * Get cars of given user id.
+     */
+    public function getUserCars(string $userId): array
+    {
+        $userCars = [];
+
+        $dataBaseService = new DataBaseService();
+
+        // Get relation users and cars :
+        $usersCarsDTO = $dataBaseService->getUserCars($userId);
+        if (!empty($usersCarsDTO)) {
+            foreach ($usersCarsDTO as $userCarDTO) {
+                $car = new Car();
+                $car->setId($userCarDTO['id']);
+                $car->setBrand($userCarDTO['brand']);
+                $car->setModel($userCarDTO['model']);
+                $car->setColor($userCarDTO['color']);
+                $car->setNbrSlots($userCarDTO['nbrSlots']);
+                $userCars[] = $car;
+            }
+        }
+
+        return $userCars;
+    }
+
+    public function setUserPost(string $userId, string $postId): bool
+    {
+        $isOk = false;
+
+        $dataBaseService = new DataBaseService();
+        $isOk = $dataBaseService->setUserPost($userId, $postId);
+
+        return $isOk;
+    } 
+
+
+    public function setUserReservation(string $userId, string $reservationId): bool
+    {
+        $isOk = false;
+
+        $dataBaseService = new DataBaseService();
+        $isOk = $dataBaseService->setUserReservation($userId, $reservationId);
+        return $isOk;
+    }
+
+
+    public function getUserPost(string $user_id): array
+    {
+        $userPost = [];
+
+        $dataBaseService = new DataBaseService();
+
+        // get the relation user and post 
+        $usersPostsDTO = $dataBaseService->getUserPost($user_id);
+        if (!empty ($usersPostsDTO)){
+            foreach ($usersPostsDTO as $userpostDTO)
+            {
+                $post = new Post();
+                $post->setId($userpostDTO['id']);
+                $post->setDescription($userpostDTO['description']);
+                $post->setPrice($userpostDTO['price']);
+                $post->setDate($userpostDTO['date']);
+                $post->setNumber_of_passengers($userpostDTO['number_of_passengers']);
+
+                $userPost [] = $post;
+            }
+        }
+
+        return $userPost;
+    }
+
+    public function getUserReservations(string $user_id): array
+    {
+        $usersReservations = [];
+
+        $dataBaseService = new DataBaseService();
+
+        //get the relation user and reservation
+        $usersReservationsDTO = $dataBaseService->getUserReservations($user_id);
+        if (!empty ($userReservationsDTO)){
+            foreach ($usersReservationsDTO as $userReservationDTO ){
+                $reservation = new Reservation();
+                $reservation->getId($userReservationDTO['id']);
+                $reservation->getDate($userReservationDTO['date']);
+                $reservation->getDeparture_time($userReservationDTO['departure_time']);
+                $reservation->getArriving_time($userReservationDTO['arriving_time']);
+                $reservation->getPlace_of_departure($userReservationDTO['place_of_departure']);
+                $reservation->getArrival_point($userReservationDTO['arrival_point']);
+
+                $usersReservations [] = $reservation;
+            }
+        }
+
+        return $usersReservations;
     }
 }

@@ -11,6 +11,7 @@ class Car
     private $type;
     private $color;
     private $year;
+    private $nbrSlots;
 
     public function getId(): string
     {
@@ -80,5 +81,15 @@ class Car
     public function setYear(int $year): void
     {
         $this->year = $year;
+    }
+
+    public function getNbrSlots(): int
+    {
+        return $this->nbrSlots;
+    }
+
+    public function setNbrSlots(int $nbrSlots): void
+    {
+        $this->nbrSlots = $nbrSlots;
     }
 }

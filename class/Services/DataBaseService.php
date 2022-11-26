@@ -8,7 +8,7 @@ class DataBaseService
     public const PORT = '3306';
     public const DATABASE_NAME = 'carpooling';
     public const MYSQL_USER = 'root';
-    public const MYSQL_PASSWORD = 'password';
+    public const MYSQL_PASSWORD = '';
 
     private $connection;
 
@@ -296,5 +296,122 @@ class DataBaseService
         $query = $this->connection->prepare($sql);
 
         return $query->execute($data);
+    }
+
+     /**
+     * Create relation bewteen an user and his car.
+     */
+    public function setUserCar(string $userId, string $carId): bool
+    {
+        $isOk = false;
+
+        $data = [
+            'userId' => $userId,
+            'carId' => $carId,
+        ];
+        $sql = 'INSERT INTO users_cars (user_id, car_id) VALUES (:userId, :carId)';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+
+        return $isOk;
+    }
+
+    /**
+     * Get cars of given user id.
+     */
+    public function getUserCars(string $userId): array
+    {
+        $userCars = [];
+
+        $data = [
+            'userId' => $userId,
+        ];
+        $sql = '
+            SELECT c.*
+            FROM cars as c
+            LEFT JOIN users_cars as uc ON uc.car_id = c.id
+            WHERE uc.user_id = :userId';
+        $query = $this->connection->prepare($sql);
+        $query->execute($data);
+        $results = $query->fetchAll(\PDO::FETCH_ASSOC);
+        if (!empty($results)) {
+            $userCars = $results;
+        }
+
+        return $userCars;
+    }
+
+    public function setUserPost(string $userId, string $postId): bool
+    {
+        $isOk = false;
+
+        $data = [
+            'userId' => $userId,
+            'postId' => $postId,
+        ];
+        $sql = 'INSERT INTO users_posts (user_id, post_id) VALUES (:userId, :postId)';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+
+        return $isOk;
+    }
+
+    public function getUserPost(String $user_id): array
+    {
+        $userPost = [];
+
+        $data = [
+            'userId' => $user_id
+        ];
+
+        $sql =' SELECT p.*
+        FROM post as p
+        LEFT JOIN users_posts as up ON up.post_id = p.id
+        WHERE up.user_id = :userId' ;
+         
+        $query = $this->connection->prepare($sql);
+        $query->execute($data);
+        $results = $query->fetchAll(\PDO::FETCH_ASSOC);
+        if (!empty($results)) {
+             $userPost = $results;
+        }
+
+        return $userPost;
+    }
+    
+    public function getUserReservations(string $user_id): array
+    {
+        $userReservation = [];
+
+        $data = [
+            'userId' => $user_id
+        ];
+
+        $sql = ' SELECT r.* 
+        FROM reservations as r 
+        LEFT JOIN users_reservations as ur ON ur.reservation_id = r.id
+        WHERE ur.user_id = :userId';
+
+        $query = $this->connection->prepare($sql);
+        $query->execute($data);
+        $results = $query->fetchAll(\PDO::FETCH_ASSOC);
+        if (!empty($results)) {
+             $userReservation = $results;
+        }
+        return $userReservation;
+    }
+
+    public function setUserReservation(string $userId, string $reservationId): bool
+    {
+        $isOk = false;
+
+        $data =[
+            'userId' => $userId,
+            'reservationId' => $reservationId
+        ];
+        $sql = ' INSERT INTO users_reservations (user_id, reservation_id) VALUES ( :userId, :reservationId)';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+        return $isOk;
     }
 }

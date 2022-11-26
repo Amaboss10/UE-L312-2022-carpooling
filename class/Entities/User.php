@@ -9,6 +9,9 @@ class User
     private $lastname;
     private $email;
     private $birthday;
+    private $cars;
+    private $posts;
+    private $reservations;
 
     public function getId(): string
     {
@@ -58,5 +61,41 @@ class User
     public function setBirthday(\DateTime $birthday): void
     {
         $this->birthday = $birthday;
+    }
+
+    public function getCars(): ?array
+    {
+        return $this->cars;
+    }
+
+    public function setCars(array $cars)
+    {
+        $this->cars = $cars;
+
+        return $this;
+    }
+
+    public function getPosts(): ?array
+    {
+        return $this->posts;
+    }
+
+    public function setPosts(array $posts)
+    {
+        $this->posts = $posts;
+
+        return $this;
+    }
+
+    public function getReservations(): ?array
+    {
+        return $this->reservations;
+    }
+
+    public function setReservations(array $reservations)
+    {
+        $this->reservations = $reservations;
+
+        return $this;
     }
 }
