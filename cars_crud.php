@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 include_once 'index/header.php';
 
 use App\Controllers\CarsController;
@@ -84,7 +84,7 @@ echo $controller->getCars();
                     </tr>
                     <tr>
                         <td>
-                            <?php echo $controller->createCar();?>
+                            <?php echo $controller->createCar(); ?>
                         </td>
                     </tr>          
                 </table>
@@ -106,10 +106,10 @@ echo $controller->getCars();
                         <td>
                             <select name="idup" class="form-control" id="car-select">
                                 <option value="" selected disabled>Choisir une voiture</option>
-                                    <?php foreach ($cars as $car): ?>
-                                        <?php $carName = $car->getId().'' . $car->getNumberplate() .'' .$car->getBrand() . ' ' . $car->getModel() . ' - ' . $car->getType().'-'. $car->getColor() . $car->getYear(); ?>
+                                    <?php foreach ($cars as $car) { ?>
+                                        <?php $carName = $car->getId() . '' . $car->getNumberplate() . '' . $car->getBrand() . ' ' . $car->getModel() . ' - ' . $car->getType() . '-' . $car->getColor() . $car->getYear(); ?>
                                         <option  value="<?php echo $car->getId(); ?>"><?php echo $carName; ?></option>
-                                    <?php endforeach; ?>
+                                    <?php } ?>
                             </select>
                         </td>
                     </tr>
@@ -177,7 +177,7 @@ echo $controller->getCars();
                     </tr>
                     <tr>
                         <td>
-                            <?php echo $controller->updateCar();?>
+                            <?php echo $controller->updateCar(); ?>
                         </td>
                     </tr>
                 </table>
@@ -200,10 +200,10 @@ echo $controller->getCars();
                         <td>
                             <select name="iddel" class="form-control" id="car-select">
                                 <option value="" selected disabled>Choisir une voiture</option>
-                                <?php foreach ($cars as $car): ?>
-                                        <?php $carName = $car->getId().'' . $car->getNumberplate() .'' .$car->getBrand() . ' ' . $car->getModel() . ' - ' . $car->getType().'-'. $car->getColor() . $car->getYear(); ?>
+                                <?php foreach ($cars as $car) { ?>
+                                        <?php $carName = $car->getId() . '' . $car->getNumberplate() . '' . $car->getBrand() . ' ' . $car->getModel() . ' - ' . $car->getType() . '-' . $car->getColor() . $car->getYear(); ?>
                                         <option  value="<?php echo $car->getId(); ?>"><?php echo $carName; ?></option>
-                                    <?php endforeach; ?>
+                                    <?php } ?>
                             </select>
                         </td>
                     </tr>
@@ -217,7 +217,7 @@ echo $controller->getCars();
                     </tr>
                     <tr>
                         <td>
-                            <?php echo $controller->deleteCar();?>
+                            <?php echo $controller->deleteCar(); ?>
                         </td>
                     </tr>
                 </table>

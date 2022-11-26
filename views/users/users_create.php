@@ -23,11 +23,11 @@ echo $controller->createUser();
     <input type="text" name="birthday">
     <br />
     <label for="cars">Voiture(s) :</label>
-    <?php foreach ($cars as $car): ?>
+    <?php foreach ($cars as $car) { ?>
         <?php $carName = $car->getBrand() . ' ' . $car->getModel() . ' ' . $car->getColor(); ?>
         <input type="checkbox" name="cars[]" value="<?php echo $car->getId(); ?>"><?php echo $carName; ?>
         <br />
-    <?php endforeach; ?>
+    <?php } ?>
     <br />
     <input type="submit" value="Créer un utilisateur">
 </form>

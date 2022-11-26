@@ -1,5 +1,5 @@
-<?php
-include_once'index/header.php';
+<?php declare(strict_types = 1);
+include_once 'index/header.php';
 
 use App\Controllers\ReservationsController;
 use App\Services\ReservationsService;
@@ -86,7 +86,7 @@ $reservations = $reservationsService->getReservations();
                     
                     <tr>
                         <td>
-                            <?php echo $controller->createReservation();?>
+                            <?php echo $controller->createReservation(); ?>
                         </td>
                     </tr>          
                 </table>
@@ -109,11 +109,11 @@ $reservations = $reservationsService->getReservations();
                         <td>
                             <select name="tbid" class="form-control" id="reservation-select">
                                 <option value="" selected disabled>Choisir une réservation</option>
-                                <?php foreach ($reservations as $reservation): ?>
-                                        <?php $reservationName ='#'. $reservation->getId(). ' a reservé pour le' . $reservation->getDate() . 'pour aller de ' . $reservation->getPlace_of_departure(). "à". $reservation->getArrival_point().'heure de départ'. $reservation->getDeparture_time(). "heure d'arrivée". $reservation->setArriving_time(); ?>
-                                        <!--<input type="checkbox" name="reservations[]" value="<?php //echo $reservation->getId(); ?>"><?php //echo $reservationName; ?>-->
+                                <?php foreach ($reservations as $reservation) { ?>
+                                        <?php $reservationName = '#' . $reservation->getId() . ' a reservé pour le' . $reservation->getDate() . 'pour aller de ' . $reservation->getPlace_of_departure() . 'à' . $reservation->getArrival_point() . 'heure de départ' . $reservation->getDeparture_time() . "heure d'arrivée" . $reservation->setArriving_time(); ?>
+                                        <!--<input type="checkbox" name="reservations[]" value="<?php // echo $reservation->getId();?>"><?php // echo $reservationName;?>-->
                                         <option  value="<?php echo $reservation->getId(); ?>"><?php echo $reservationName; ?></option>
-                                <?php endforeach; ?>
+                                <?php } ?>
                             </select>
                         </td>
                     </tr>
@@ -203,11 +203,11 @@ $reservations = $reservationsService->getReservations();
                         <td>
                             <select name="iddel" class="form-control" id="reservation-select">
                                 <option value="" selected disabled>Choisir une réservation</option>
-                                <?php foreach ($reservations as $reservation): ?>
-                                        <?php $reservationName ='#'. $reservation->getId(). ' a reservé pour le' . $reservation->getDate() . 'pour aller de ' . $reservation->getPlace_of_departure(). "à". $reservation->getArrival_point().'heure de départ'. $reservation->getDeparture_time(). "heure d'arrivée". $reservation->setArriving_time(); ?>
-                                        <!--<input type="checkbox" name="reservations[]" value="<?php //echo $reservation->getId(); ?>"><?php //echo $reservationName; ?>-->
+                                <?php foreach ($reservations as $reservation) { ?>
+                                        <?php $reservationName = '#' . $reservation->getId() . ' a reservé pour le' . $reservation->getDate() . 'pour aller de ' . $reservation->getPlace_of_departure() . 'à' . $reservation->getArrival_point() . 'heure de départ' . $reservation->getDeparture_time() . "heure d'arrivée" . $reservation->setArriving_time(); ?>
+                                        <!--<input type="checkbox" name="reservations[]" value="<?php // echo $reservation->getId();?>"><?php // echo $reservationName;?>-->
                                         <option  value="<?php echo $reservation->getId(); ?>"><?php echo $reservationName; ?></option>
-                                <?php endforeach; ?>
+                                <?php } ?>
                             </select>
                         </td>
                     </tr>
@@ -221,7 +221,7 @@ $reservations = $reservationsService->getReservations();
                     </tr>
                     <tr>
                         <td>
-                            <?php echo $controller->deleteReservation();?>
+                            <?php echo $controller->deleteReservation(); ?>
                         </td>
                     </tr>
                 </table>

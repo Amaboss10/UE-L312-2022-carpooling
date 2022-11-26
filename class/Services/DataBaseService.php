@@ -298,7 +298,7 @@ class DataBaseService
         return $query->execute($data);
     }
 
-     /**
+    /**
      * Create relation bewteen an user and his car.
      */
     public function setUserCar(string $userId, string $carId): bool
@@ -311,9 +311,8 @@ class DataBaseService
         ];
         $sql = 'INSERT INTO users_cars (user_id, car_id) VALUES (:userId, :carId)';
         $query = $this->connection->prepare($sql);
-        $isOk = $query->execute($data);
 
-        return $isOk;
+        return $query->execute($data);
     }
 
     /**
@@ -351,40 +350,39 @@ class DataBaseService
         ];
         $sql = 'INSERT INTO users_posts (user_id, post_id) VALUES (:userId, :postId)';
         $query = $this->connection->prepare($sql);
-        $isOk = $query->execute($data);
 
-        return $isOk;
+        return $query->execute($data);
     }
 
-    public function getUserPost(String $user_id): array
+    public function getUserPost(string $user_id): array
     {
         $userPost = [];
 
         $data = [
-            'userId' => $user_id
+            'userId' => $user_id,
         ];
 
-        $sql =' SELECT p.*
+        $sql = ' SELECT p.*
         FROM post as p
         LEFT JOIN users_posts as up ON up.post_id = p.id
-        WHERE up.user_id = :userId' ;
-         
+        WHERE up.user_id = :userId';
+
         $query = $this->connection->prepare($sql);
         $query->execute($data);
         $results = $query->fetchAll(\PDO::FETCH_ASSOC);
         if (!empty($results)) {
-             $userPost = $results;
+            $userPost = $results;
         }
 
         return $userPost;
     }
-    
+
     public function getUserReservations(string $user_id): array
     {
         $userReservation = [];
 
         $data = [
-            'userId' => $user_id
+            'userId' => $user_id,
         ];
 
         $sql = ' SELECT r.* 
@@ -396,8 +394,9 @@ class DataBaseService
         $query->execute($data);
         $results = $query->fetchAll(\PDO::FETCH_ASSOC);
         if (!empty($results)) {
-             $userReservation = $results;
+            $userReservation = $results;
         }
+
         return $userReservation;
     }
 
@@ -405,13 +404,13 @@ class DataBaseService
     {
         $isOk = false;
 
-        $data =[
+        $data = [
             'userId' => $userId,
-            'reservationId' => $reservationId
+            'reservationId' => $reservationId,
         ];
         $sql = ' INSERT INTO users_reservations (user_id, reservation_id) VALUES ( :userId, :reservationId)';
         $query = $this->connection->prepare($sql);
-        $isOk = $query->execute($data);
-        return $isOk;
+
+        return $query->execute($data);
     }
 }

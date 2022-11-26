@@ -14,11 +14,11 @@ class UsersController
         $html = '';
 
         // If the form have been submitted :
-            if (isset($_POST['firstname']) &&
-            isset($_POST['lastname']) &&
-            isset($_POST['email']) &&
-            isset($_POST['birthday']) &&
-            isset($_POST['cars'])) {
+        if (isset($_POST['firstname'])
+        && isset($_POST['lastname'])
+        && isset($_POST['email'])
+        && isset($_POST['birthday'])
+        && isset($_POST['cars'])) {
             // Create the user :
             $usersService = new UsersService();
             $userId = $usersService->setUser(
@@ -49,14 +49,12 @@ class UsersController
                 foreach ($_POST['posts'] as $postId) {
                     $isTrue = $usersService->setUserPost($userId, $postId);
                 }
-                if ($userId && $isTrue ) {
+                if ($userId && $isTrue) {
                     $html = 'Utilisateur créé avec succès.';
                 } else {
                     $html = 'Erreur lors de la création de l\'utilisateur.';
                 }
-
-                }
-            
+            }
         }
 
         return $html;
@@ -73,31 +71,30 @@ class UsersController
         $usersService = new UsersService();
         $users = $usersService->getUsers();
 
-         // Get html :
-         foreach ($users as $user) {
+        // Get html :
+        foreach ($users as $user) {
             $carsHtml = '';
-           // $postHtml = '';
+            // $postHtml = '';
             if (!empty($user->getCars())) {
                 foreach ($user->getCars() as $car) {
                     $carsHtml .= $car->getBrand() . ' ' . $car->getModel() . ' ' . $car->getColor() . ' ';
                 }
             }
-        
-           /* if (!empty($user->getPosts()){
-                foreach ($user->getPosts() as $post) {
-                    $postHtml .= $post->getDescription() . ' ' . $post->getPrice() . ' ' . $post->getDate() . ' ' . $post->getNumber_of_passengers() . ' ';
-                }
-                */
-            }
-            $html .=
-                '#' . $user->getId() . ' ' .
-                $user->getFirstname() . ' ' .
-                $user->getLastname() . ' ' .
-                $user->getEmail() . ' ' .
-                $user->getBirthday()->format('d-m-Y') . ' ' .
-                $carsHtml . '<br />';
 
-        
+            /* if (!empty($user->getPosts()){
+                 foreach ($user->getPosts() as $post) {
+                     $postHtml .= $post->getDescription() . ' ' . $post->getPrice() . ' ' . $post->getDate() . ' ' . $post->getNumber_of_passengers() . ' ';
+                 }
+                 */
+        }
+        $html .=
+            '#' . $user->getId() . ' ' .
+            $user->getFirstname() . ' ' .
+            $user->getLastname() . ' ' .
+            $user->getEmail() . ' ' .
+            $user->getBirthday()->format('d-m-Y') . ' ' .
+            $carsHtml . '<br />';
+
         return $html;
     }
 

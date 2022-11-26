@@ -1,11 +1,11 @@
-<?php 
+<?php declare(strict_types = 1);
+
 namespace App\Services;
 
-use App\Entities\User;
 use App\Entities\Car;
 use App\Entities\Post;
 use App\Entities\Reservation;
-use DateTime;
+use App\Entities\User;
 
 class UsersService
 {
@@ -66,8 +66,7 @@ class UsersService
         return $dataBaseService->deleteUser($id);
     }
 
-
-/**
+    /**
      * Create relation bewteen an user and his car.
      */
     public function setUserCar(string $userId, string $carId): bool
@@ -75,9 +74,8 @@ class UsersService
         $isOk = false;
 
         $dataBaseService = new DataBaseService();
-        $isOk = $dataBaseService->setUserCar($userId, $carId);
 
-        return $isOk;
+        return $dataBaseService->setUserCar($userId, $carId);
     }
 
     /**
@@ -111,21 +109,18 @@ class UsersService
         $isOk = false;
 
         $dataBaseService = new DataBaseService();
-        $isOk = $dataBaseService->setUserPost($userId, $postId);
 
-        return $isOk;
-    } 
-
+        return $dataBaseService->setUserPost($userId, $postId);
+    }
 
     public function setUserReservation(string $userId, string $reservationId): bool
     {
         $isOk = false;
 
         $dataBaseService = new DataBaseService();
-        $isOk = $dataBaseService->setUserReservation($userId, $reservationId);
-        return $isOk;
-    }
 
+        return $dataBaseService->setUserReservation($userId, $reservationId);
+    }
 
     public function getUserPost(string $user_id): array
     {
@@ -133,11 +128,10 @@ class UsersService
 
         $dataBaseService = new DataBaseService();
 
-        // get the relation user and post 
+        // get the relation user and post
         $usersPostsDTO = $dataBaseService->getUserPost($user_id);
-        if (!empty ($usersPostsDTO)){
-            foreach ($usersPostsDTO as $userpostDTO)
-            {
+        if (!empty($usersPostsDTO)) {
+            foreach ($usersPostsDTO as $userpostDTO) {
                 $post = new Post();
                 $post->setId($userpostDTO['id']);
                 $post->setDescription($userpostDTO['description']);
@@ -145,7 +139,7 @@ class UsersService
                 $post->setDate($userpostDTO['date']);
                 $post->setNumber_of_passengers($userpostDTO['number_of_passengers']);
 
-                $userPost [] = $post;
+                $userPost[] = $post;
             }
         }
 
@@ -158,10 +152,10 @@ class UsersService
 
         $dataBaseService = new DataBaseService();
 
-        //get the relation user and reservation
+        // get the relation user and reservation
         $usersReservationsDTO = $dataBaseService->getUserReservations($user_id);
-        if (!empty ($userReservationsDTO)){
-            foreach ($usersReservationsDTO as $userReservationDTO ){
+        if (!empty($userReservationsDTO)) {
+            foreach ($usersReservationsDTO as $userReservationDTO) {
                 $reservation = new Reservation();
                 $reservation->getId($userReservationDTO['id']);
                 $reservation->getDate($userReservationDTO['date']);
@@ -170,7 +164,7 @@ class UsersService
                 $reservation->getPlace_of_departure($userReservationDTO['place_of_departure']);
                 $reservation->getArrival_point($userReservationDTO['arrival_point']);
 
-                $usersReservations [] = $reservation;
+                $usersReservations[] = $reservation;
             }
         }
 
