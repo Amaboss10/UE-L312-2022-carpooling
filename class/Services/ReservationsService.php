@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Entities\Car;
 use App\Entities\Reservation;
 
 class ReservationsService
@@ -60,5 +61,46 @@ class ReservationsService
         $dataBaseService = new DataBaseService();
 
         return $dataBaseService->deleteReservation($idReservation);
+    }
+
+    /**
+     *  relation car reservation
+     */
+    public function getCarReservations(string $carId): array
+    {
+        $carReservations = [];
+
+        $dataBaseService = new DataBaseService();
+
+        //get the relation car and reservation
+        $carReservationsDTO = $dataBaseService->getCarReservations($carId);
+        if (!empty ($carReservationsDTO)) {
+            foreach($carReservationsDTO as $carReservationDTO) {
+                $car = new Car();
+                $car->setId($carReservationDTO['id']);
+                $car->setNumberplate($carReservationDTO['numberplate']);
+                $car->setBrand($carReservationDTO['brand']);
+                $car->setModel($carReservationDTO['model']);
+                $car->setType($carReservationDTO['type']);
+                $car->setColor($carReservationDTO['color']);
+                $car->setYear($carReservationDTO['year']);
+                $car->setNbrSlots($carReservationDTO['nbrSlots']);
+                $car->setPost($carReservationDTO['post']);
+
+                $carReservations [] = $car;
+            }
+        }
+
+        return $carReservations;
+    }
+
+    public function setCarReservations(string $carId, string $reservationId): bool
+    {
+        $isOk = false;
+
+        $dataBaseService = new DataBaseService();
+
+        return $dataBaseService->setCarReservations($carId, $reservationId);
+
     }
 }

@@ -10,6 +10,7 @@ class Reservation
     private $arriving_time;
     private $place_of_departure;
     private $arrival_point;
+    private $cars;
 
     public function getId(): string
     {
@@ -69,5 +70,17 @@ class Reservation
     public function setArrival_point(string $arrival_point): void
     {
         $this->arrival_point = $arrival_point;
+    }
+
+    public function getCars(): ?array
+    {
+        return $this->cars;
+    }
+
+    public function setCars(array $cars)
+    {
+        $this->cars = $cars;
+
+        return $this;
     }
 }

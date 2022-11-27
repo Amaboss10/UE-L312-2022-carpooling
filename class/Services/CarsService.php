@@ -71,7 +71,7 @@ class CarsService
         if (!empty($carsPostsDTO)) {
             foreach($carsPostsDTO as $carPostDTO) {
             $post = new Post();
-            $post->setID($carPostDTO['id']);
+            $post->setId($carPostDTO['id']);
             $post->setDescription($carPostDTO['description']);
             $post->setPrice($carPostDTO['price']);
             $post->setDate($carPostDTO['date']);
@@ -87,7 +87,7 @@ class CarsService
 
     }
 
-    /*public function setCarsPosts ( $string $carId, string $postId ) : bool
+    public function setCarsPosts ( string $carId, string $postId ) : bool
     
     {
         $isOk = false;
@@ -95,8 +95,8 @@ class CarsService
         $dataBaseService = new DataBaseService();
 
         return $dataBaseService->setCarsPosts($carId, $postId);
-        //return $isok;
-    }*/
+        
+    }
 }
 
 

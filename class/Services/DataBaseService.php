@@ -299,7 +299,7 @@ class DataBaseService
     }
 
     /**
-     * Create relation bewteen an user and his car.
+     * Create relation between an user and his car.
      */
     public function setUserCar(string $userId, string $carId): bool
     {
@@ -340,6 +340,9 @@ class DataBaseService
         return $userCars;
     }
 
+    /*
+    * Relation between user and post 
+    */
     public function setUserPost(string $userId, string $postId): bool
     {
         $isOk = false;
@@ -376,7 +379,9 @@ class DataBaseService
 
         return $userPost;
     }
-
+    /*
+    * Relation between user and reservation
+    */
     public function getUserReservations(string $user_id): array
     {
         $userReservation = [];
@@ -414,6 +419,9 @@ class DataBaseService
         return $query->execute($data);
     }
 
+    /**
+     * Relation between car and post
+     */
     public function getCarsPosts(string $car_id): array
     {
         $carsPosts = [];
@@ -450,4 +458,44 @@ class DataBaseService
         $query->execute($data);
         return $query->execute($data);
     } 
+
+    /**
+     * Relation between car and reservation 
+     */
+    public function getCarReservations($car_id): array
+    {
+        $carReservations = [];
+
+        $data = [
+            'carId'=> $car_id
+        ];
+
+        $sql = 'SELECT r.*
+        FROM reservations as r
+        INNER JOIN cars_reservation as cr ON cr.reservation_id = r.id
+        cr.car_id = :car_id';
+
+        $query = $this->connection->prepare($sql);
+        $query->execute($data);
+        $results = $query->fetchAll(\PDO::FETCH_ASSOC);
+        if (!empty($results)) {
+            $carReservations = $results;
+        }
+
+        return $carReservations;
+    }
+
+    public function setCarReservations(String $carId, string $reservationId): bool
+    {
+        $isOk = false;
+
+        $data = [
+            'carId' => $carId,
+            'reservationId' => $reservationId
+        ];
+        $sql = 'SELECT INTO cars_reservation (car_id, reservation_id) VALUES ( :carId, :reservationId)';
+        $query = $this->connection->prepare($sql);
+
+        return $query->execute($data);
+    }
 }
