@@ -20,7 +20,7 @@ $reservations = $reservationsService->getReservations();
                 <table class="form-control" id="in_1">
                     <tr>
                         <td class="title" >
-                            <h5>Création d'une réservation</h5>
+                            <h1>Création d'une réservation</h1>
                         </td>
                     </tr>
 
@@ -98,7 +98,7 @@ $reservations = $reservationsService->getReservations();
                 <table class="form-control" id='in-3'>
                     <tr>
                         <td>
-                            <h5>Mise à jour d'une réservation</h5>
+                            <h1>Mise à jour d'une réservation</h1>
                         </td>
                     </tr>
 
@@ -192,7 +192,7 @@ $reservations = $reservationsService->getReservations();
                 <table class="form-control" id='in_2'>
                     <tr>
                         <td>
-                            <h5>Supression d'une réservation</h5>
+                            <h1>Supression d'une réservation</h1>
                         </td>
                     </tr>
 

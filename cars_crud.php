@@ -15,10 +15,10 @@ echo $controller->getCars();
     <tr>
         <td>
             <form method="post" action="cars_crud.php" name ="carCreateForm">
-                <table class="form-control" id="tb_1">
+                <table class="form-control" >
                     <tr>
                         <td>
-                            <h5>Création d'une voiture</h5>
+                            <h1>Création d'une voiture</h1>
                         </td>
                     </tr>
                     <tr>
@@ -100,10 +100,10 @@ echo $controller->getCars();
 
         <td>
             <form method="post" action="cars_crud.php" name ="carUpdateForm">
-                <table class="form-control" id='in-3'>
+                <table class="form-control">
                     <tr>
                         <td>
-                            <h5>Mise à jour d'une voiture</h5>
+                            <h1>Mise à jour d'une voiture</h1>
                         </td>
                     </tr>
                     <tr>
@@ -111,7 +111,7 @@ echo $controller->getCars();
                             <label for="idup">Voiture :</label>
                         </td>
                         <td>
-                            <select name="idup" class="form-control" id="car-select">
+                            <select name="idup" class="form-control" >
                                 <option value="" selected disabled>Choisir une voiture</option>
                                     <?php foreach ($cars as $car) { ?>
                                         <?php $carName = $car->getId() . '' . $car->getNumberplate() . '' . $car->getBrand() . ' ' . $car->getModel() . ' - ' . $car->getType() . '-' . $car->getColor() . $car->getYear(); ?>
@@ -201,10 +201,10 @@ echo $controller->getCars();
 
 
             <form method="post" action="cars_crud.php" name ="carDeleteForm">
-                <table class="form-control" id='tb_2'>
+                <table class="form-control" >
                     <tr>
                         <td>
-                            <h5>Supression d'une voiture</h5>
+                            <h1>Supression d'une voiture</h1>
                         </td>
                     </tr>
                     <tr>
@@ -212,7 +212,7 @@ echo $controller->getCars();
                             <label for="iddel">Voiture :</label>
                         </td>
                         <td>
-                            <select name="iddel" class="form-control" id="car-select">
+                            <select name="iddel" class="form-control" >
                                 <option value="" selected disabled>Choisir une voiture</option>
                                 <?php foreach ($cars as $car) { ?>
                                         <?php $carName = $car->getId() . '' . $car->getNumberplate() . '' . $car->getBrand() . ' ' . $car->getModel() . ' - ' . $car->getType() . '-' . $car->getColor() . $car->getYear(); ?>
