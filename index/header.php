@@ -8,7 +8,7 @@
     <header>
         <nav>
             <ul class="menu cf">
-               <li> <a class="nav-item nav-link" href="index.php">Home</a></li>
+               <li> <a class="nav-item nav-link" href="index.php">Acceuil</a></li>
                <li> <a class="nav-item nav-link" href="users_crud.php">Utilisateurs</a></li>
                <li> <a class="nav-item nav-link" href="cars_crud.php">Voitures</a></li>
                <li> <a class="nav-item nav-link" href="reservations_crud.php">Réservations</a></li>
