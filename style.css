@@ -57,6 +57,10 @@ p {
     text-align: center;
 }
 
+h1 {
+    font-size: 500px;
+}
+
 .align-center {
     align-items: center;
 }
@@ -87,13 +91,6 @@ tr {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-}
-
-h1 {
-    text-transform: uppercase;
-    font-family: Arial, Helvetica;
-    font-size: 4px;
-    margin-top: 30px;
 }
 
 .form-control {
