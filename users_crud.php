@@ -16,7 +16,7 @@ $carsService = new CarsService();
 $cars = $carsService->getCars();
 
 $PostsService = new PostsService();
-$PostsService = $PostsService->getPost();
+$posts = $PostsService->getPost();
 
 $reservationsService = new ReservationsService();
 $reservations = $reservationsService->getReservations();
@@ -66,7 +66,9 @@ echo $controller->getUsers();
                             <label for="birthday">Date de naissance :</label>
                         </td>
                         <td>
-                            <input type="text" class="form-control" name="birthday" placeholder="format dd-mm-yyyy :">
+                        <input type="date" class="form-control" name="date"
+                        value="2022-11-25"
+                        min="2018-01-01" max="2024-12-31">
                         </td>
                     </tr>
 
@@ -105,7 +107,7 @@ echo $controller->getUsers();
                 <table class='form-control'>
                     <tr>
                         <td>
-                            <h1wh>Mise à jour d'un utilisateur</h1wh>
+                            <h1>Mise à jour d'un utilisateur</h1>
                         </td>
                     </tr>
                     <tr>
@@ -165,11 +167,12 @@ echo $controller->getUsers();
                             <label for="posts">Annonce(s) :</label>
                         </td>
                         <td>
-                        <select name="idup" class="form-control">
-                                <option value="" selected disabled>Choisir une postnonce</option>
-                                <?php foreach ($Posts as $post): ?>
-                                        <?php $postName ='#'. $post->getId(). ' | ' . $post->getPrice() . '€ ' . $post->getDeparture().'➔'. $post->getDestination(); ?>
-                                        <!--<input type="checkbox" name="reservations[]" value="<?php //echo $reservation->getId(); ?>"><?php //echo $reservationName; ?>-->
+                        <select name="post[]" class="form-control">
+                                <option value="" selected disabled>Choisir une annonce</option>
+                                <option value="0" >Aucune</option>
+                                <?php foreach ($posts as $post): ?> 
+                                    <?php $postName ='#'. $post->getId(). ' | ' . $post->getPrice() . '€ ' . $post->getDeparture().'➔'. $post->getDestination(); ?>
+
                                         <option  value="<?php echo $post->getId(); ?>"><?php echo $postName; ?></option>
                                 <?php endforeach; ?>
                             </select>
@@ -210,7 +213,7 @@ echo $controller->getUsers();
                 <table class='form-control'>
                     <tr>
                         <td>
-                            <h1wh>Supression d'un utilisateur</h1wh>
+                            <h1>Supression d'un utilisateur</h1>
                         </td>
                     </tr>
 

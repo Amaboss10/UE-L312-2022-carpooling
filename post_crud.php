@@ -8,7 +8,7 @@ require __DIR__ . '/vendor/autoload.php';
 include_once 'index/header.php';
 $controller = new PostsController();
 $PostsService = new PostsService();
-$Posts = $PostsService->getPost();
+$posts = $PostsService->getPost();
 $carsService = new CarsService();
 $cars = $carsService->getCars();
 $reservationsService = new ReservationsService;
@@ -109,7 +109,7 @@ echo $controller->getPosts();
                         <td>
                         <select name="idup" class="form-control">
                                 <option value="" selected disabled>Choisir une postnonce</option>
-                                <?php foreach ($Posts as $post): ?>
+                                <?php foreach ($posts as $post): ?>
                                         <?php $postName ='#'. $post->getId(). ' | ' . $post->getPrice() . '€ ' . $post->getDeparture().'➔'. $post->getDestination(); ?>
                                         <!--<input type="checkbox" name="reservations[]" value="<?php //echo $reservation->getId(); ?>"><?php //echo $reservationName; ?>-->
                                         <option  value="<?php echo $post->getId(); ?>"><?php echo $postName; ?></option>
@@ -198,15 +198,14 @@ echo $controller->getPosts();
                     
                     <tr>
                         <td>
-                            <label for="id">postnonce :</label>
+                            <label for="id">annonce :</label>
                         </td>
 
                         <td>
                             <select name="iddel" class="form-control">
-                                <option value="" selected disabled>Choisir une postnonce</option>
-                                <?php foreach ($Posts as $post): ?>
+                                <option value="" selected disabled>Choisir une annonce</option>
+                                <?php foreach ($posts as $post): ?>
                                         <?php $postName ='#'. $post->getId(). ' | ' . $post->getPrice() . '€ ' . $post->getDeparture().'➔'. $post->getDestination(); ?>
-                                        <!--<input type="checkbox" name="reservations[]" value="<?php //echo $reservation->getId(); ?>"><?php //echo $reservationName; ?>-->
                                         <option  value="<?php echo $post->getId(); ?>"><?php echo $postName; ?></option>
                                 <?php endforeach; ?>
                             </select>
