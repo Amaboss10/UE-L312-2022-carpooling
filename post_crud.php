@@ -13,7 +13,7 @@ $carsService = new CarsService();
 $cars = $carsService->getCars();
 $reservationsService = new ReservationsService;
 $reservations = $reservationsService->getReservations();
-echo $controller->getPosts();
+echo $controller->getPost();
 ?>
 <br>
 <table  class="form">
@@ -22,14 +22,32 @@ echo $controller->getPosts();
             <form method="post" action="posts_crud.php" name ="postCreateForm">
                 <table class="form-control">
                     <tr>
-                        <td colsppost="2">
-                            <h1>Création d'une postnonce</h>
+                        <td>
+                            <h1>Création d'une annonce</h>
                         </td>
                     </tr>
 
                     <tr>
                         <td>
-                            <label for="price">Prix :</label>  
+                            <label for="id">Identifiant :</label>  
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="id">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="description">Description :</label>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="description">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="price">prix :</label>
                         </td>
                         <td>
                             <input type="text" class="form-control" name="price">
@@ -38,55 +56,32 @@ echo $controller->getPosts();
 
                     <tr>
                         <td>
-                            <label for="departure">Départ :</label>
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" name="departure">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label for="destination">Arrivée :</label>
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" name="destination">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
                             <label for="date">Date de départ :</label>
                         </td>
                         <td>
-                            <input type="text" name="datea" class="form-control" placeholder="format dd-mm-yyyy :">
-                        </td>
+                        <input type="date" class="form-control" name="date"
+                        value="2022-11-25"
+                        min="2018-01-01" max="2024-12-31">                        </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <label for="number_of_passangers">nombre de passagers:</label>
+                        </td>
+                        <td>
+                        <input type="text" class="form-control" name="number_of_passangers">
+                       </td>
+                    </tr>
+
 
                     <tr>
                         <td>
-                            <label for="cars">Voiture :</label>
-                        </td>
-                        <td>
-                            <select name="iddel" class="form-control" >
-                                <option value="" selected disabled>Choisir une voiture</option>
-                                <?php foreach ($cars as $car) { ?>
-                                        <?php $carName = $car->getId() . '' . $car->getNumberplate() . '' . $car->getBrand() . ' ' . $car->getModel() . ' - ' . $car->getType() . '-' . $car->getColor() . $car->getYear(); ?>
-                                        <option  value="<?php echo $car->getId(); ?>"><?php echo $carName; ?></option>
-                                    <?php } ?>
-                            </select>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td style="text-align:center" colsppost="2">
                             <br><input type="submit" class="button" value="Créer">
                         </td>
                     </tr> 
                     
                     <tr>
-                        <td colsppost="2">
-                            <?php echo $controller->createPost(); ?>
+                        <td>
+                            <?php echo $controller->createPosts(); ?>
                         </td>
                     </tr>
                 </table>
@@ -97,20 +92,20 @@ echo $controller->getPosts();
             <form method="post" action="posts_crud.php" name ="postUpdateForm">
                 <table class="form-control" >
                     <tr>
-                        <td colsppost='2'>
-                            <h1>Mise à jour d'une postnonce</h1>
+                        <td>
+                            <h1>Mise à jour d'une annonce</h1>
                         </td>
                     </tr>
                     
                     <tr>
                         <td>
-                            <label for="id">postnonce :</label>
+                            <label for="id">annonce :</label>
                         </td>
                         <td>
                         <select name="idup" class="form-control">
-                                <option value="" selected disabled>Choisir une postnonce</option>
+                                <option value="" selected disabled>Choisir une annonce</option>
                                 <?php foreach ($posts as $post): ?>
-                                        <?php $postName ='#'. $post->getId(). ' | ' . $post->getPrice() . '€ ' . $post->getDeparture().'➔'. $post->getDestination(); ?>
+                                        <?php $postName ='#'. $post->getId(). ' | ' . $post->getPrice() . '€ ' . $post->getdescription().'➔'. $post->getDestination(); ?>
                                         <!--<input type="checkbox" name="reservations[]" value="<?php //echo $reservation->getId(); ?>"><?php //echo $reservationName; ?>-->
                                         <option  value="<?php echo $post->getId(); ?>"><?php echo $postName; ?></option>
                                 <?php endforeach; ?>
@@ -120,65 +115,56 @@ echo $controller->getPosts();
 
                     <tr>
                         <td>
-                            <label for="name">Prix :</label>
+                            <label for="id">Identifiant :</label>  
                         </td>
                         <td>
-                            <input type="text" class="form-control" name="priceup">
+                            <input type="text" class="form-control" name="id">
                         </td>
                     </tr>
 
                     <tr>
                         <td>
-                            <label for="departure">Départ :</label>
+                            <label for="description">Description :</label>
                         </td>
                         <td>
-                            <input type="text" class="form-control" name="departureup">
+                            <input type="text" class="form-control" name="description">
                         </td>
                     </tr>
 
                     <tr>
                         <td>
-                            <label for="destination">Arrivée :</label>
+                            <label for="price">prix :</label>
                         </td>
                         <td>
-                            <input type="text" class="form-control" name="destinationup">
+                            <input type="text" class="form-control" name="price">
                         </td>
                     </tr>
 
                     <tr>
                         <td>
-                            <label for="date">Date :</label>
+                            <label for="date">Date de départ :</label>
                         </td>
                         <td>
-                            <input type="text" name="dateup" class="form-control" placeholder="format dd-mm-yyyy :">
-                        </td>
+                        <input type="date" class="form-control" name="date"
+                        value="2022-11-25"
+                        min="2018-01-01" max="2024-12-31">                        </td>
                     </tr>
-
                     <tr>
                         <td>
-                            <label for="reservation">Réservation :</label>
+                            <label for="number_of_passangers">nombre de passagers:</label>
                         </td>
                         <td>
-                            <select name="reservations[]" class="form-control">
-                                <option value="" selected disabled>Choisir une réservation</option>
-                                <option value="0" >Aucune</option>
-                                <?php foreach ($reservations as $reservation): ?>
-                                        <?php $reservationName ='#'. $reservation->getId(). ' | ' . $reservation->getTitle() . ' Pour ' . $reservation->getnbrPassengers().' passager(s)'; ?>
-                                        <!--<input type="checkbox" name="reservations[]" value="<?php //echo $reservation->getId(); ?>"><?php //echo $reservationName; ?>-->
-                                        <option  value="<?php echo $reservation->getId(); ?>"><?php echo $reservationName; ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </td>
+                        <input type="text" class="form-control" name="number_of_passangers">
+                       </td>
                     </tr>
-
                     <tr>
-                        <td style="text-align:center" colsppost="2">
+                        <td>
                             <br><input type="submit" class="button" value="Mise à jour">
                         </td>
                     </tr>
 
                     <tr>
-                        <td colsppost="2">
+                        <td>
                             <?php echo $controller->updatePosts(); ?>
                         </td>
                     </tr>
@@ -191,8 +177,8 @@ echo $controller->getPosts();
             <form method="post" action="posts_crud.php" name ="postDeleteForm">
                 <table class="form-control">
                     <tr>
-                        <td colsppost="2">
-                            <h1>Supression d'une postnonce</h1>
+                        <td>
+                            <h1>Supression d'une annonce</h1>
                         </td>
                     </tr>
                     
@@ -205,7 +191,7 @@ echo $controller->getPosts();
                             <select name="iddel" class="form-control">
                                 <option value="" selected disabled>Choisir une annonce</option>
                                 <?php foreach ($posts as $post): ?>
-                                        <?php $postName ='#'. $post->getId(). ' | ' . $post->getPrice() . '€ ' . $post->getDeparture().'➔'. $post->getDestination(); ?>
+                                        <?php $postName ='#'. $post->getId(). ' | ' . $post->getPrice() . '€ ' . $post->getdescription().'➔'. $post->getDestination(); ?>
                                         <option  value="<?php echo $post->getId(); ?>"><?php echo $postName; ?></option>
                                 <?php endforeach; ?>
                             </select>
@@ -213,7 +199,7 @@ echo $controller->getPosts();
                     </tr>
 
                     <tr>
-                        <td style="text-align:center" colsppost="2">
+                        <td>
                             <br>
                                 <input type="submit" class="button" value="Supprimer">
                             <br>
@@ -221,8 +207,8 @@ echo $controller->getPosts();
                     </tr>
 
                     <tr>
-                        <td colsppost="2">
-                            <?php echo $controller->deletepost(); ?>
+                        <td>
+                            <?php echo $controller->deletePosts(); ?>
                         </td>
                     </tr>
                 </table>

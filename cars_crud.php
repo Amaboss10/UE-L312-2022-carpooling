@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php
 include_once 'index/header.php';
 
 use App\Controllers\CarsController;

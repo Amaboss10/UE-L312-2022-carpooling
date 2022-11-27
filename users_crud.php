@@ -87,6 +87,20 @@ echo $controller->getUsers();
                         </td>
                     </tr>
 
+                    <td>
+                            <label for="reservations">Reservation(s) :</label>
+                        </td>
+                        <td>
+                            <select name="reservations[]" class="form-control">
+                                <option value="" selected disabled>Choisir une réservation</option>
+                                <option value="0" >Aucune</option>
+                                <?php foreach ($reservations as $reservation): ?>
+                                        <?php $reservationName ='#'. $reservation->getId(). ' | ' . $reservation->getTitle() . ' Pour ' . $reservation->getnbrPassengers().' passager(s)'; ?>
+                                        <!--<input type="checkbox" name="reservations[]" value="<?php //echo $reservation->getId(); ?>"><?php //echo $reservationName; ?>-->
+                                        <option  value="<?php echo $reservation->getId(); ?>"><?php echo $reservationName; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </td>
                     <tr>
                         <td>
                             <br>
@@ -158,8 +172,10 @@ echo $controller->getUsers();
                             <label for="birthday">Date de naissance :</label>
                         </td>
                         <td>
-                            <input type="text" class="form-control" name="birthday" placeholder="format dd-mm-yyyy :">
-                        </td>
+                        <input type="date" class="form-control" name="date"
+                        value="2022-11-25"
+                        min="2018-01-01" max="2024-12-31">
+                    </td>
                     </tr>
 
                     <tr>
@@ -178,6 +194,7 @@ echo $controller->getUsers();
                             </select>
                         </td>
                     </tr>
+                                <td>
                             <label for="reservations">Reservation(s) :</label>
                         </td>
                         <td>
