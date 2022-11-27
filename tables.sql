@@ -81,3 +81,14 @@ INSERT INTO `users_reservations` (`user_id`, `reservation_id`) VALUES
 (1, 2),
 (2, 3),
 (2, 4);
+
+CREATE TABLE cars_posts (
+    car_id INT NOT NULL,
+    post_id INT NOT NULL,
+    PRIMARY KEY(car_id, post_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+INSERT INTO 'cars_posts' ('car_id', 'post_id') VALUES
+(1, 1),
+(2, 2),
+(3, 3)

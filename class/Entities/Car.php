@@ -12,6 +12,7 @@ class Car
     private $color;
     private $year;
     private $nbrSlots;
+    private $post;
 
     public function getId(): string
     {
@@ -91,5 +92,17 @@ class Car
     public function setNbrSlots(int $nbrSlots): void
     {
         $this->nbrSlots = $nbrSlots;
+    }
+
+    public function getPost(): ?array
+    {
+        return $this->post;
+    }
+
+    public function setPost(array $posts)
+    {
+        $this->post = $posts;
+
+        return $this;
     }
 }

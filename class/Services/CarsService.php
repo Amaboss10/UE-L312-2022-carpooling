@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Entities\Car;
+use App\Entities\Post;
 
 class CarsService
 {
@@ -58,4 +59,44 @@ class CarsService
 
         return $dataBaseService->deleteCar($idCar);
     }
+
+    public function getCarsPosts(string $carId): array
+    {
+        $carsPosts = [];
+
+        $dataBaseService = new DataBaseService();
+
+        //get relation car and post 
+        $carsPostsDTO = $dataBaseService->getCarsPosts($carId);
+        if (!empty($carsPostsDTO)) {
+            foreach($carsPostsDTO as $carPostDTO) {
+            $post = new Post();
+            $post->setID($carPostDTO['id']);
+            $post->setDescription($carPostDTO['description']);
+            $post->setPrice($carPostDTO['price']);
+            $post->setDate($carPostDTO['date']);
+            $post->setNumber_of_passengers($carPostDTO['number_of_passengers']);
+            
+            $carsPosts [] = $post; 
+            
+            }
+
+        }
+
+        return $carsPosts;
+
+    }
+
+    /*public function setCarsPosts ( $string $carId, string $postId ) : bool
+    
+    {
+        $isOk = false;
+        
+        $dataBaseService = new DataBaseService();
+
+        return $dataBaseService->setCarsPosts($carId, $postId);
+        //return $isok;
+    }*/
 }
+
+

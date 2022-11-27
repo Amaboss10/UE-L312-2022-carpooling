@@ -413,4 +413,41 @@ class DataBaseService
 
         return $query->execute($data);
     }
+
+    public function getCarsPosts(string $car_id): array
+    {
+        $carsPosts = [];
+
+        $data = [
+            'carId' => $car_id
+        ];
+
+        $sql = ' SELECT p.*
+        FROM post as p
+        INNER JOIN cars_posts as cp ON cp.post_id = p.id
+        WHERE cp.car_id = :carId';
+
+         $query = $this->connection->prepare($sql);
+        $query->execute($data);
+        $results = $query->fetchAll(\PDO::FETCH_ASSOC);
+        if (!empty($results)) {
+            $carsPosts = $results;
+        }
+
+        return $carsPosts;
+    }
+
+    public function setCarsPosts(string $car_id, string $post_id): bool
+    {
+        $isOk = false;
+
+        $data = [
+            'carId' => $car_id,
+            'postId' => $post_id
+        ];
+        $sql = ' INSERT INTO cars_posts ( car_id, post_id) VALUES (:carId, postId) ';
+        $query = $this->connection->prepare($sql);
+        $query->execute($data);
+        return $query->execute($data);
+    } 
 }
