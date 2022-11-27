@@ -9,7 +9,7 @@ class PostsController
     /**
      * Return the html for the create action.
      */
-    public function createPost(): string
+    public function createPosts(): string
     {
         $html = '';
 
@@ -31,9 +31,9 @@ class PostsController
                 $_POST['number_of_passangers']
             );
             if ($isOk) {
-                $html = 'l\'annonce est créé avec succès.';
+                $html = "l'annonce est créé avec succès.";
             } else {
-                $html = 'Erreur lors de la création de l\' annonce.';
+                $html = "Erreur lors de la création de l' annonce.";
             }
         }
 
@@ -98,7 +98,7 @@ class PostsController
     /**
      * delete a posts.
      */
-    public function deletePost(): string
+    public function deletePosts(): string
     {
         $html = '';
         // if the form have been submitted :

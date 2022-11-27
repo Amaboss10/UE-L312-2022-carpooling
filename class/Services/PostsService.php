@@ -15,9 +15,9 @@ class PostsService
         $dataBaseService = new DataBaseService();
         $dateDateTime = new \DateTime($date);
         if (empty($idPost)) {
-            $postId = $dataBaseService->createPost($description, $price, $date, $number_of_passengers);
+            $postId = $dataBaseService->createPosts($description, $price, $date, $number_of_passengers);
         } else {
-            $dataBaseService->updatePost($idPost, $description, $price, $date, $number_of_passengers);
+            $dataBaseService->updatePosts($idPost, $description, $price, $date, $number_of_passengers);
             $postId = $idPost;
         }
 
@@ -54,7 +54,7 @@ class PostsService
         /**
          * Delete post.
          */
-        public function deletePost(string $idPost): bool
+        public function deletePosts(string $idPost): bool
         {
             $isOk = false;
             $dataBaseService = new DataBaseService();

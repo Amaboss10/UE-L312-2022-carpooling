@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php 
 
 namespace App\Controllers;
 
@@ -34,7 +34,7 @@ class CarsController
                 $_POST['color'],
                 $_POST['year']
             );
-            if ($isOk) {
+            if ($carsId) {
                 $html = 'voiture créé avec succès.';
             } else {
                 $html = 'Erreur lors de la création de la voiture.';

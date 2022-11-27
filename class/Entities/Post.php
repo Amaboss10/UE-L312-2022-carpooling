@@ -1,6 +1,4 @@
-<?php declare(strict_types = 1);
-
-namespace App\Entities;
+<?php namespace App\Entities;
 
 class Post
 {
