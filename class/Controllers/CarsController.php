@@ -57,7 +57,7 @@ class CarsController
         // Get html :
         foreach ($cars as $car) {
             $html .=
-            '#' . $car->getId . ' ' .
+            '#' . $car->getId() . ' ' .
             $car->getNumberplate() . ' ' .
             $car->getBrand() . ' ' .
             $car->getModel() . ' ' .

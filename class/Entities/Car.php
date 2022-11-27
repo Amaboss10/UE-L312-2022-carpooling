@@ -74,25 +74,16 @@ class Car
         $this->color = $color;
     }
 
-    public function getYear(): int
+    public function getYear(): string
     {
         return $this->year;
     }
 
-    public function setYear(int $year): void
+    public function setYear (string $year): void
     {
         $this->year = $year;
     }
 
-    public function getNbrSlots(): int
-    {
-        return $this->nbrSlots;
-    }
-
-    public function setNbrSlots(int $nbrSlots): void
-    {
-        $this->nbrSlots = $nbrSlots;
-    }
 
     public function getPost(): ?array
     {
