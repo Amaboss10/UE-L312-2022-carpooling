@@ -17,7 +17,7 @@ class CarsService
         if (empty($idCAR)) {
             $carId = $dataBaseService->createCar($numberplate, $brand, $model, $type, $color, $year);
         } else {
-            $dataBaseService->updateCar($idCAR, $numberplate, $brand, $model, $type, $color, $year);
+            $dataBaseService->updateCar($id, $numberplate, $brand, $model, $type, $color, $year);
             $carId = $idCAR;
         }
 
@@ -35,7 +35,7 @@ class CarsService
         if (!empty($carsDTO)) {
             foreach ($carsDTO as $carDTO);
             $car = new Car();
-            $car->setId($carDTO['idCar']);
+            $car->setId($carDTO['id']);
             $car->setNumberplate($carDTO['numberplate']);
             $car->setBrand($carDTO['brand']);
             $car->setModel($carDTO['model']);

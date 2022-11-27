@@ -56,7 +56,14 @@ echo $controller->getCars();
                             <input type="text" class="form-control" name="model">
                         </td>
                     </tr>
-
+                    <tr>
+                        <td>
+                            <label for="type">Type :</label>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="type">
+                        </td>
+                    </tr>
                     <tr>
                         <td>
                             <label for="color">Couleur :</label>
@@ -149,7 +156,14 @@ echo $controller->getCars();
                             <input type="text" class="form-control" name="model">
                         </td>
                     </tr>
-
+                    <tr>
+                        <td>
+                            <label for="type">Type :</label>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="type">
+                        </td>
+                    </tr>
                     <tr>
                         <td>
                             <label for="color">Couleur :</label>
