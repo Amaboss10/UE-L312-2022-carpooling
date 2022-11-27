@@ -13,7 +13,7 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `birthday`) VALUES
 (3, 'Thomas', 'Dumoulin', 'sonemail2@gmail.com', '1985-10-08');
 
 
-CCREATE TABLE IF NOT EXISTS `cars` (
+CREATE TABLE IF NOT EXISTS `cars` (
   `id` int NOT NULL AUTO_INCREMENT,
   `numberplate` varchar(255) NOT NULL,
   `brand` varchar(255) NOT NULL,
