@@ -13,7 +13,7 @@ $carsService = new CarsService();
 $cars = $carsService->getCars();
 $reservationsService = new ReservationsService;
 $reservations = $reservationsService->getReservations();
-echo $controller->getPost();
+echo $controller->getPosts();
 ?>
 <br>
 <table  class="form">
